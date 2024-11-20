@@ -1,3 +1,5 @@
+// coach's code
+
 // Access DOM Elements
 const confirmBtn = document.getElementById('confirmBtn')
 const totalDisplay = document.getElementById('total')
@@ -205,8 +207,34 @@ const menuItems = [
 // confirm Button 
 confirmBtn.addEventListener('click', (e)=> {
     e.preventDefault()
-    console.log('click')
+    // console.log('click')
+    getTotal()
 })
+
+// getTotal()
+const getTotal =()=> {
+
+    const subtotal = parseFloat(cartSubtotal.innerText)
+    const tipAmt = parseFloat(document.getElementById('tipAmt').value)
+    const otherAmt = parseFloat(document.getElementById('otherAmt').value)
+    const yourTip = document.getElementById('yourTip')
+    const theSubtotal = document.getElementById('theSubtotal')
+    const taxDisplay = document.getElementById('tax')
+
+    let taxTotal = subtotal * tax 
+
+    let receiptTip = isNaN(tipAmt) ? otherAmt : (subtotal * tipAmt)
+
+    let total = isNaN(tipAmt) ? subtotal + otherAmt + taxTotal : 
+        receiptTip + subtotal + taxTotal
+
+    theSubtotal.innerText = subtotal
+    taxDisplay.innerText = taxTotal.toFixed(2)
+    yourTip.innerText = receiptTip.toFixed(2)
+    totalDisplay.innerText = total.toFixed(2)
+}
+
+// coach's code
 
 // load the menu items
 // make rows
@@ -318,9 +346,16 @@ cartButtons.forEach(button => {
         for (let i = 0; i < menuItems.length; i++) {
             menuItems[i].id === id ? qty = menuItems[i].qty : null
         }
-        addItems(price, qty, item, id)
+
+        // console.log(button.getAttribute('data-qty'))
+
+        if (button.getAttribute('data-qty') > 0 ) {
+            addItems(price, qty, item, id)
+        }
     })
 })
+
+// coach's code
 
 // addItems()
 let receiptArray = []
@@ -365,7 +400,7 @@ const makeReceipt =(obj, el)=> {
     const itemSubtotal = document.createElement('td')
     itemSubtotal.classList.add('item-subtotal', 'text-center')
     itemSubtotal.setAttribute('id', `subTotal${obj.id}`)
-    itemSubtotal.innerText = obj.itemTotal
+    itemSubtotal.innerText = obj.itemTotal.toFixed(2)
 
     tableRow.appendChild(receiptChoice)
     tableRow.appendChild(receiptQty)
