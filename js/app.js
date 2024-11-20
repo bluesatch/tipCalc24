@@ -252,7 +252,7 @@ menuDivs.forEach(div => {
 for (let i = 0; i < menuTypes.length; i++) {
     menuDivs[i].children[0].innerText = menuTypes[i]
     menuDivs[i].children[1].setAttribute('id', `${menuTypes[i]}Row`)
-    console.log(menuDivs[i])
+    // console.log(menuDivs[i])
 }
 // grab the appRow
 const appRow = document.getElementById('appetizersRow')
@@ -305,6 +305,7 @@ menuItems.forEach(item => {
             </div>
         </footer>
     `
+
 
     column.appendChild(card)
 
